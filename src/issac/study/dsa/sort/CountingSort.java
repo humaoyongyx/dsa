@@ -15,7 +15,7 @@ public class CountingSort extends AbstractSort {
         int length = disOrderArr.length;
         int max = Arrays.stream(disOrderArr).max().getAsInt();
         int[] bucketArr = new int[max + 1];
-        Arrays.fill(bucketArr, 0);
+        //   Arrays.fill(bucketArr, 0); Java 数组有初始化有默认值
         for (int i = 0; i < length; i++) {
             Integer valAsKey = disOrderArr[i];
             bucketArr[valAsKey]++;
