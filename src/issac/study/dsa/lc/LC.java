@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * @author issac.hu
  */
-public class TwoSum {
+public class LC {
 
     public static void main(String[] args) {
         int[] nums = {2, 7, 11, 15};
