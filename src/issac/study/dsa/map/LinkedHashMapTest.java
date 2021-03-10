@@ -26,6 +26,8 @@ public class LinkedHashMapTest {
         });
         System.out.println(newV);
         Integer v = linkedHashMap.get(1);
+        linkedHashMap.put(1, 1);
+        linkedHashMap.putIfAbsent(1, 1);
         System.out.println(v);
 
     }
