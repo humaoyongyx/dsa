@@ -12,6 +12,6 @@ public class MyKey {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        return false;
     }
 }

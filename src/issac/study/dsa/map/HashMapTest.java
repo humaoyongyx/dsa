@@ -14,6 +14,8 @@ public class HashMapTest {
         hashMap.put(1, 2);
         hashMap.put(2, 2);
         hashMap.get(1);
+        hashMap.remove(1);
+        hashMap.containsKey(1);
         //遍历的时候如果不是用iterator遍历的话，删除和新增都会报ConcurrentModificationException
         for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
             System.out.println(entry.getKey() + "->" + entry.getValue());
@@ -37,6 +39,16 @@ public class HashMapTest {
         for (Map.Entry<Integer, Integer> entry : concurrentHashMap.entrySet()) {
 
         }
+        concurrentHashMap.put(1, 1);
+        concurrentHashMap.containsKey(1);
+        concurrentHashMap.entrySet().iterator();
+        concurrentHashMap.remove(1);
+        concurrentHashMap.get(1);
+
+        Hashtable<Integer, Integer> hashtable = new Hashtable<>();
+        hashtable.put(1, 1);
+        hashtable.get(1);
+        hashtable.entrySet().iterator();
 
         CopyOnWriteArrayList<Object> objects = new CopyOnWriteArrayList<>();
         objects.add(1);
