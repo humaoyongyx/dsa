@@ -20,9 +20,11 @@ public class ProxyTest {
     }
 
 
-
-
-
+    /**
+     * 一般是实现InvocationHandler,Proxy.newProxyInstance，此种方式类必须要实现一个接口
+     *
+     * @param <T>
+     */
     public static class JdkProxy<T> implements InvocationHandler {
 
         private Object target;
