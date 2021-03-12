@@ -3,6 +3,7 @@ package issac.study.dsa.map;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * @author issac.hu
@@ -59,5 +60,52 @@ public class HashMapTest {
         Vector vector = new Vector();
 
         Collections.synchronizedList(new ArrayList());
+
+        CopyOnWriteArraySet<Integer> sets = new CopyOnWriteArraySet<>();
+    }
+
+
+    public static class MyKey {
+        private int hash = 1;
+
+        public void setHash(int hash) {
+            this.hash = hash;
+        }
+
+        @Override
+        public int hashCode() {
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            return hashCode() + "";
+        }
+    }
+
+    /**
+     * 如果hashmap的key的hashcode改变了，那么这个key就再也get不到了
+     */
+    public static void testKey() {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        Integer i = 1;
+        hashMap.put(i, 1);
+        System.out.println(hashMap);
+        i++;
+        System.out.println(hashMap);
+        System.out.println(i);
+        HashMap<MyKey, Integer> hashMap1 = new HashMap<>();
+        MyKey key = new MyKey();
+        hashMap1.put(key, 1);
+        System.out.println(hashMap1);
+        key.setHash(2);//还能get到吗？答案是否定的
+        System.out.println(key);
+        System.out.println(hashMap1.get(key));
+        System.out.println(hashMap1);
     }
 }
