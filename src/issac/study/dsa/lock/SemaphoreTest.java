@@ -10,9 +10,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * 共享锁，不可重入
  * <p>
  * 区别于 ReentrantLock 独占锁，可重入
- *
+ * <p>
  * 默认acquire 是acquireSharedInterruptibly 可中断的
  * release
+ *
  * @author issac.hu
  */
 public class SemaphoreTest {
@@ -23,11 +24,11 @@ public class SemaphoreTest {
 
     public static void main(String[] args) {
         for (int i = 0; i < 5; i++) {
+            int finalI = i;
             new Thread(() -> {
-                limitThread();
+                limitThread(finalI);
             }).start();
         }
-
     }
 
     /**
@@ -38,16 +39,20 @@ public class SemaphoreTest {
      * Thread[Thread-3,5,main]
      * Thread[Thread-4,5,main]
      */
-    public static void limitThread() {
+    public static void limitThread(final int i) {
         try { // 申请许可
             semp.acquire();
             try {
-// 业务逻辑
-                System.out.println(Thread.currentThread());
-                TimeUnit.SECONDS.sleep(3);
+                // 业务逻辑
+                if (i == 0) {
+                    TimeUnit.SECONDS.sleep(5);
+                } else {
+                    TimeUnit.SECONDS.sleep(1);
+                }
+                System.out.println(Thread.currentThread() + "->" + i);
             } catch (Exception e) {
             } finally {
-// 释放许可
+             // 释放许可
                 semp.release();
             }
         } catch (InterruptedException e) {
