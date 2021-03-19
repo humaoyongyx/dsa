@@ -6,6 +6,7 @@ package issac.study.dsa.threadpool;
 public class ThreadLocalTest {
     static ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
     static ThreadLocal<Integer> threadLocal2 = new ThreadLocal<>();
+    static InheritableThreadLocal<Integer> integerInheritableThreadLocal = new InheritableThreadLocal<>();
 
     public static void main(String[] args) {
         for (int i = 0; i < 20; i++) {
@@ -14,6 +15,8 @@ public class ThreadLocalTest {
         }
         threadLocal.set(1111);
         System.out.println(threadLocal.get());
+
+        Thread thread = new Thread();
 
     }
 }
