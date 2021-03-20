@@ -1,5 +1,7 @@
 package issac.study.dsa;
 
+import java.util.Arrays;
+
 /**
  * @author issac.hu
  */
@@ -28,5 +30,8 @@ public class Test {
     }
 
     public static void main(String[] args) {
+        int[] test = new int[]{1, 2};
+        int[] x = Arrays.copyOfRange(test, 0, 0);
+        System.out.println(Arrays.toString(x));
     }
 }
