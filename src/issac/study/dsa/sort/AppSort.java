@@ -9,7 +9,7 @@ public class AppSort {
 
     public static void main(String[] args) {
         //num=100000是个分水岭，测试的时候可以设置为10000和100000便于测试
-        int num = 10;
+        int num = 10000;
         boolean showArr = true;
         int[] randomArr = getRandomArr(num);
         //当num达到10000以上的时候，排序变差
