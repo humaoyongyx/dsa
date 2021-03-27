@@ -1,4 +1,4 @@
-package issac.study.dsa.list;
+package issac.study.dsa.listset;
 
 import java.util.TreeSet;
 import java.util.Vector;
