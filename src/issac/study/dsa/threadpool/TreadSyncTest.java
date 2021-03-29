@@ -2,6 +2,8 @@ package issac.study.dsa.threadpool;
 
 
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
@@ -16,11 +18,26 @@ public class TreadSyncTest {
         //go2();
         go3();
     }
+    static Thread root = null;
+    public static void go3() throws InterruptedException {
 
-    public static void go3() {
+
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(10, () -> {
+            System.out.println("loop end..");
+        });
         Thread pre = new Thread(() -> {
             LockSupport.park();
             System.out.println(10);
+            try {
+                cyclicBarrier.await();
+                LockSupport.park();
+                System.out.println(10);
+                cyclicBarrier.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
         });
         for (int i = 9; i > 0; i--) {
             int finalI = i;
@@ -29,11 +46,24 @@ public class TreadSyncTest {
                 LockSupport.park();
                 System.out.println(finalI);
                 LockSupport.unpark(finalPre);
+                try {
+                    cyclicBarrier.await();
+                    LockSupport.park();
+                    System.out.println(finalI);
+                    LockSupport.unpark(finalPre);
+                    cyclicBarrier.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (BrokenBarrierException e) {
+                    e.printStackTrace();
+                }
             });
             pre.start();
             pre = next;
         }
         pre.start();
+        LockSupport.unpark(pre);
+        TimeUnit.SECONDS.sleep(3);
         LockSupport.unpark(pre);
     }
 
