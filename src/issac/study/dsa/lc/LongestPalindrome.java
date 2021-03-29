@@ -7,6 +7,7 @@ public class LongestPalindrome {
 
     public static void main(String[] args) {
         System.out.println(longestPalindrome("babad"));
+        System.out.println(isPalindrome(111));
     }
 
     /**
@@ -69,5 +70,42 @@ public class LongestPalindrome {
             }
         }
         return s.substring(start, end);
+    }
+
+    public static boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        if (x < 10) {
+            return true;
+        }
+        int n = 1;
+        int l = x;
+        while ((l = l / 10) != 0) {
+            n++;
+        }
+
+        for (int i = 1, j = n; i <= n; i++, j--) {
+            int l1 = j;
+            int l2 = i;
+            int rev = x;
+            int ori = x;
+            while (l1-- > 1) {
+                rev /= 10;
+            }
+            while (l2-- > 1) {
+                ori /= 10;
+            }
+            ori %= 10;
+            rev %= 10;
+            if (ori != rev) {
+                return false;
+            }
+            if (i == j) {
+                break;
+            }
+
+        }
+        return true;
     }
 }
