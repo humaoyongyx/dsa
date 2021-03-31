@@ -39,5 +39,6 @@ public class ZStr {
     public static void main(String[] args) {
         String paypalishiring = convert("PAYPALISHIRING", 4);
         System.out.println(paypalishiring);
+        System.out.println(Integer.MAX_VALUE);
     }
 }

@@ -62,6 +62,9 @@ public class HashMapTest {
         Collections.synchronizedList(new ArrayList());
 
         CopyOnWriteArraySet<Integer> sets = new CopyOnWriteArraySet<>();
+
+        HashSet<Integer> hashSet=new HashSet<>();
+        hashSet.contains(1);
     }
 
 

@@ -6,8 +6,53 @@ package issac.study.dsa.lc;
 public class LongestPalindrome {
 
     public static void main(String[] args) {
-        System.out.println(longestPalindrome("babad"));
+        String s = "ac";
+        System.out.println(longestPalindrome(s));
         System.out.println(isPalindrome(111));
+        System.out.println(test(s));
+    }
+
+
+    /**
+     * [i,j) i,j+1
+     * s.substring(i,j);
+     * <p>
+     * P(i,j)= P(i+1,j-1) && Si==Sj
+     * i<=j;
+     * i==j的时候
+     * <p>
+     * s.length==1,P(i,j)==true
+     * s.length==2,P(i,j)==Si==Sj
+     * <p>
+     * <p>
+     * <p>
+     * dp
+     *
+     * @return
+     */
+    public static String test(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        int length = s.length();
+        boolean[][] dp = new boolean[length][length];
+        String result = s.charAt(0) + "";
+        for (int l = 0; l < length; l++) {
+            for (int i = 0; i + l < length; i++) {
+                int j = i + l;
+                if (l == 0) {
+                    dp[i][j] = true;
+                } else if (l == 1) {
+                    dp[i][j] = s.charAt(i) == s.charAt(j);
+                } else {
+                    dp[i][j] = dp[i + 1][j - 1] && (s.charAt(i) == s.charAt(j));
+                }
+                if (dp[i][j] && (j - i + 1) > result.length()) {
+                    result = s.substring(i, j + 1);
+                }
+            }
+        }
+        return result;
     }
 
     /**
